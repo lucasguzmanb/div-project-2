@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# SQLite / Local DB backups
+*.db-journal
+*.sqlite-journal
+
+# Backup / temp files
+*~
+*.tmp
+*.bak
+
+# VSCode settings (optional)
+.vscode/
+
+# PDF files
+*.pdf
