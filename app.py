@@ -8,8 +8,9 @@ from sklearn.preprocessing import MinMaxScaler
 import os
 import numpy as np
 
-ARCGIS_TILE = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
-STADIA_SAT = "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}.jpg"
+MAP_STYLE_LIGHT = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+MAP_STYLE_DARK = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+MAP_STYLE_DARK_LABELS = "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
 
 METRICS = ["crime_rate", "employment_rate", "gdp_per_capita", "cost_index"]
 DEFAULT_CENTER = {"lat": 48.5, "lon": 9.0, "zoom": 3}
@@ -515,7 +516,15 @@ def update_app(w_cost, w_crime, w_gdp, w_emp, dark_mode, btn_clicks):
                 CITY_ZOOM,
             )
 
-    tile_source = STADIA_SAT if dark_mode else ARCGIS_TILE
+
+    if dark_mode:
+        my_layers = [
+            {"sourcetype": "raster", "source": [MAP_STYLE_DARK], "below": "traces"},
+            {"sourcetype": "raster", "source": [MAP_STYLE_DARK_LABELS], "below": "traces"},
+        ]
+    else:
+        my_layers = [{"sourcetype": "raster", "source": [MAP_STYLE_LIGHT], "below": "traces"}]
+
     fig_map = go.Figure(layout=dict(template=template))
 
     others, top10 = df_sorted.iloc[10:], df_sorted.head(10)
@@ -552,9 +561,7 @@ def update_app(w_cost, w_crime, w_gdp, w_emp, dark_mode, btn_clicks):
             center={"lat": lat_center, "lon": lon_center},
             zoom=zoom_level,
             style="open-street-map",
-            layers=[
-                {"sourcetype": "raster", "source": [tile_source], "below": "traces"}
-            ],
+            layers=my_layers,
         ),
         margin={"r": 0, "t": 0, "l": 0, "b": 0},
         showlegend=False,
@@ -704,6 +711,8 @@ app.clientside_callback(
     Output("theme-trigger", "children"),
     Input("theme-switch", "value"),
 )
+
+server = app.server
 
 if __name__ == "__main__":
     app.run(debug=True)
