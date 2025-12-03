@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  /* Common Variables (Light by default) */
+  --bg-color: #f4f7fb;
+  --card-bg: #ffffff;
+  --text-primary: #0f1724;
+  --text-secondary: #7b8ca6;
+  --border-color: #e9e9e9;
+  --accent: #4f6ef7;
+  --shadow: 0 10px 30px rgba(15,23,36,0.06);
+  
+  /* Ranking Highlight */
+  --top-bg: #F7D488;
+  --top-border: #E2C79C;
+  --top-text: #5A440F;
+  
+  --radius: 12px;
+}
+
+body.dark-mode {
+  --bg-color: #09111c;
+  --text-primary: #dbe9f8;
+  --text-secondary: rgba(223,232,246,0.55);
+  --border-color: #223041;
+  --shadow: 0 12px 36px rgba(1,6,12,0.6);
+  
+  /* Dark Ranking Highlight */
+  --top-bg: #4A360A;
+  --top-border: #8C7333;
+  --top-text: #F0E9D1;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+.app-root {
+  background: var(--bg-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Layout Components --- */
+
+.sidebar-container {
+  background: var(--bg-color);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.graph-card {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 100%;
+}
+
+.main-row {
+  height: calc(100vh - 95px);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 20px 10px 10px 10px;
+}
+
+.graph-row {
+  margin: 0 10px 10px 10px;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.graph-h40 {
+  height: 40vh;
+  margin: 0;
+  padding: 0;
+}
+
+.podium-container {
+  pointer-events: auto;
+}
+
+/* --- Typography & Inputs --- */
+
+h1, h2, h3, h4, h5, label, .dropdown {
+  color: var(--text-primary);
+}
+
+.small-text {
+  font-size: 0.9rem;
+}
+
+input[type='range'] {
+  accent-color: var(--accent);
+}
+
+/* --- List Group (Ranking) --- */
+
+.scrollable-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.list-group-item {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  transition: transform 0.12s ease;
+}
+
+/* Force rounded corners on the first item in the ranking list */
+#top-10-list .list-group-item:first-child {
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+}
+
+.list-group-item:hover {
+  transform: scale(0.97);
+  cursor: pointer;
+}
+
+.list-group-item.bg-top {
+  background: var(--top-bg);
+  border-color: var(--top-border);
+  color: var(--top-text);
+}
+
+.list-group-item.bg-top:hover {
+  background: var(--top-bg);
+}
+
+.list-group-item small {
+  color: var(--text-secondary);
+}
+
+.list-group-item.bg-top small {
+  color: var(--top-text);
+  opacity: 0.8;
+}
+
+.shadow-btn {
+  box-shadow: var(--shadow);
+}
+
+.modal-content {
+  background-color: var(--bg-color);
+}
+
+.Select-control, .Select-menu-outer {
+  background-color: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+  box-shadow: var(--shadow) !important;
+  cursor: pointer;
+}
+
+.Select-value-label, .Select-placeholder, .Select-option {
+  color: var(--text-primary) !important;
+}
+
+.Select-option:hover {
+  background-color: rgba(79, 110, 247, 0.2) !important;
+}
+
+/* Dark mode */
+body.dark-mode .modal-content {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  box-shadow: var(--shadow);
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+  border-color: var(--border-color);
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+body.dark-mode .Select-control,
+body.dark-mode .Select-menu-outer {
+  background-color: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+body.dark-mode .Select-value-label,
+body.dark-mode .Select-placeholder, 
+body.dark-mode .Select-option {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-color) !important;
+}
+
+body.dark-mode .Select-option:hover {
+  background-color: rgba(79, 110, 247, 0.2) !important;
+}
