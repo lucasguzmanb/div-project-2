@@ -1,5 +1,5 @@
 
-# EU Move Recommender
+# City Move Recommender
 
 This project provides a recommendation system that suggests cities to live in based on cost, crime, emplyement and GDP data. The final result can be visualized on an interactive map.
 
