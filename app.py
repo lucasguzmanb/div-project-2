@@ -407,7 +407,7 @@ app.layout = dbc.Container(
                     className="p-0",
                 ),
             ],
-            className="graph-row mb-5",
+            className="graph-row pb-5",
         ),
         # Modal
         dbc.Modal(
