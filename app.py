@@ -312,7 +312,7 @@ app.layout = dbc.Container(
                             ],
                             className="d-flex justify-content-between align-items-center mb-3",
                         ),
-                        html.P("Adjust the weights of each factor:"),
+                        html.P("Adjust the weights of each factor based on your preferences:"),
                         *create_slider("w_cost", "Cost weight (penalizes)"),
                         *create_slider("w_crime", "Crime weight (penalizes)"),
                         *create_slider("w_gdp", "GDP weight (benefits)"),
