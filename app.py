@@ -296,6 +296,40 @@ app.layout = dbc.Container(
             style={"flexShrink": "0", "padding": "10px 10px 0 10px"},
         ),
         dbc.Row(
+            dbc.Col(
+                dbc.Alert(
+                    [
+                        html.Strong("How to use"),
+                        html.Ul(
+                            [
+                                html.Li(
+                                    "Move the sliders to weight cost and crime (penalize) or GDP and employment (reward)."
+                                ),
+                                html.Li(
+                                    "Click a city in the ranking to recenter the map and see its details."
+                                ),
+                                html.Li(
+                                    "Hover markers to read scores; toggle Dark Mode for a low-light map style."
+                                ),
+                                html.Li(
+                                    "Use 'Open City Comparator' to add cities and compare them on the radar chart."
+                                ),
+                                html.Li(
+                                    "Review the charts below for safety, employment, GDP vs. cost, and score distribution."
+                                ),
+                            ],
+                            className="mb-0 small-text",
+                        ),
+                    ],
+                    color="info",
+                    className="mt-3 mb-0",
+                    dismissable=True,
+                ),
+                width=12,
+            ),
+            className="g-0 mx-3",
+        ),
+        dbc.Row(
             [
                 # Sidebar
                 dbc.Col(
@@ -312,7 +346,9 @@ app.layout = dbc.Container(
                             ],
                             className="d-flex justify-content-between align-items-center mb-3",
                         ),
-                        html.P("Adjust the weights of each factor based on your preferences:"),
+                        html.P(
+                            "Adjust the weights of each factor based on your preferences:"
+                        ),
                         *create_slider("w_cost", "Cost weight (penalizes)"),
                         *create_slider("w_crime", "Crime weight (penalizes)"),
                         *create_slider("w_gdp", "GDP weight (benefits)"),
@@ -516,14 +552,19 @@ def update_app(w_cost, w_crime, w_gdp, w_emp, dark_mode, btn_clicks):
                 CITY_ZOOM,
             )
 
-
     if dark_mode:
         my_layers = [
             {"sourcetype": "raster", "source": [MAP_STYLE_DARK], "below": "traces"},
-            {"sourcetype": "raster", "source": [MAP_STYLE_DARK_LABELS], "below": "traces"},
+            {
+                "sourcetype": "raster",
+                "source": [MAP_STYLE_DARK_LABELS],
+                "below": "traces",
+            },
         ]
     else:
-        my_layers = [{"sourcetype": "raster", "source": [MAP_STYLE_LIGHT], "below": "traces"}]
+        my_layers = [
+            {"sourcetype": "raster", "source": [MAP_STYLE_LIGHT], "below": "traces"}
+        ]
 
     fig_map = go.Figure(layout=dict(template=template))
 
